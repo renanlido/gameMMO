@@ -43,12 +43,16 @@ const Home: React.FC = () => {
   }, [data, searchTerm]);
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await fetchData();
-      setData(response);
-    };
+    try {
+      const getData = async () => {
+        const response = await fetchData();
+        setData(response);
+      };
 
-    getData();
+      getData();
+    } catch (error) {
+      console.log(`Ta porra! Deu erro: ${error}`);
+    }
   }, []);
 
   return (

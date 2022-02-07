@@ -7,9 +7,8 @@ export const Input = styled.input`
   padding: 20px;
   border-radius: 8px;
 
-  margin-top: -40px;
-
   text-align: center;
+  margin-top: -35px;
 
   font-size: 1rem;
   font-weight: 700;

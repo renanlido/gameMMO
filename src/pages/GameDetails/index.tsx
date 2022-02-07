@@ -43,37 +43,43 @@ interface StoragedComments extends SubmitedComment {
 const GameDetails: React.FC = () => {
   const [data, setData] = useState<FindOne>();
   const [comments, setComments] = useState<StoragedComments[]>([]);
-  const [comments2, setComments2] = useState<StoragedComments[]>([]);
   const { register, handleSubmit } = useForm<SubmitedComment>();
 
   const query = useQuery();
 
   const id = query.get('id');
 
-  const onSubmit = ({ comment, email, name }: SubmitedComment) => {
-    const sendedComment: StoragedComments = {
-      id: uuid(),
-      comment,
-      email,
-      name,
-      likes: 0
-    };
+  const onSubmit = useCallback(
+    ({ comment, email, name }: SubmitedComment) => {
+      const sendedComment: StoragedComments = {
+        id: uuid(),
+        comment,
+        email,
+        name,
+        likes: 0
+      };
 
-    const array = comments;
+      setComments([...comments, sendedComment]);
+    },
+    [comments]
+  );
 
-    array.push(sendedComment);
+  const handleLikeValue = useCallback(
+    ({ id: commentID, action }: { id: string; action: 'like' | 'unlike' }) => {
+      const newCommentsArray = comments.map(item => {
+        if (commentID === item.id) {
+          const newLikeValue =
+            action === 'like' ? item.likes + 1 : item.likes - 1;
 
-    console.log(array);
+          return { ...item, likes: newLikeValue };
+        }
+        return item;
+      });
 
-    setComments(array);
-  };
-
-  const handleLikeValue = (value: 'add' | 'remove') => {
-    // if (value === 'add') {
-    // }
-
-    console.log(value);
-  };
+      setComments(newCommentsArray);
+    },
+    [comments]
+  );
 
   const fetchData = useCallback(async () => {
     try {
@@ -87,14 +93,7 @@ const GameDetails: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
-
-  useEffect(() => {
-    setComments2(comments);
-
-    // add storage here
-    console.log(comments);
-  }, [comments]);
+  }, [id]);
 
   useEffect(() => {
     const getData = async () => {
@@ -130,7 +129,7 @@ const GameDetails: React.FC = () => {
 
     return (
       <Container>
-        <Header />
+        <Header pageName="Game Details" />
         <Banner img={firstScreenShot}>
           <div>
             <Text
@@ -208,6 +207,7 @@ const GameDetails: React.FC = () => {
               <Text fontSize="1rem">{platform}</Text>
             </Box>
           </HStack>
+
           <VStack alignItems="start" mt={10}>
             <Text
               as="h1"
@@ -311,6 +311,7 @@ const GameDetails: React.FC = () => {
             <VStack
               background="whitesmoke"
               borderTopRadius="10px"
+              borderBottomRadius={comments.length === 0 ? '10px' : '0px'}
               w="100%"
               p={10}
               alignItems="start"
@@ -348,13 +349,16 @@ const GameDetails: React.FC = () => {
             </VStack>
           </VStack>
 
-          {comments2.map(item => (
+          {comments.map((item, index) => (
             <VStack
               key={item.id}
               background="whitesmoke"
-              borderBottomRadius="10px"
+              borderBottomRadius={
+                index === comments.length - 1 ? '10px' : '0px'
+              }
               w="100%"
-              p={10}
+              px={10}
+              py={5}
             >
               <HStack
                 width="100%"
@@ -367,20 +371,36 @@ const GameDetails: React.FC = () => {
                   </Text>
                   <Text fontSize="0.8rem">{item.comment}</Text>
                 </VStack>
-                <HStack gap={15}>
+                <HStack
+                  maxWidth="200px"
+                  width="100"
+                  flex="1"
+                  justifyContent="space-between"
+                >
                   <IconButton
                     colorScheme="red"
                     aria-label="Triangle Down"
-                    onClick={() => handleLikeValue('add')}
+                    onClick={() =>
+                      handleLikeValue({ id: item.id, action: 'unlike' })
+                    }
                     icon={<GoTriangleDown />}
                   />
-                  <Text color="green" fontWeight="bold">
-                    {item.likes}
+                  <Text
+                    color={
+                      (item.likes === 0 && 'blackAlpha.800') ||
+                      (item.likes > 0 && 'green') ||
+                      'red'
+                    }
+                    fontWeight="bold"
+                  >
+                    {item.likes > 0 ? `+ ${item.likes}` : item.likes}
                   </Text>
                   <IconButton
                     colorScheme="green"
                     aria-label="Triangle Up"
-                    onClick={() => handleLikeValue('remove')}
+                    onClick={() =>
+                      handleLikeValue({ id: item.id, action: 'like' })
+                    }
                     icon={<GoTriangleUp />}
                   />
                 </HStack>

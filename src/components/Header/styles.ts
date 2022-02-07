@@ -60,26 +60,6 @@ export const Nav = styled.nav`
 
   color: #fff;
 
-  button {
-    background: rgb(34, 193, 195);
-    background: -moz-linear-gradient(
-      180deg,
-      rgba(34, 193, 195, 1) 0%,
-      rgba(96, 179, 65, 1) 100%
-    );
-    background: -webkit-linear-gradient(
-      180deg,
-      rgba(34, 193, 195, 1) 0%,
-      rgba(96, 179, 65, 1) 100%
-    );
-    background: linear-gradient(
-      180deg,
-      rgba(34, 193, 195, 1) 0%,
-      rgba(96, 179, 65, 1) 100%
-    );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#22c1c3",endColorstr="#60b341",GradientType=1);
-  }
-
   background: rgb(65, 68, 92);
   background: -moz-linear-gradient(
     90deg,
@@ -110,4 +90,12 @@ export const NavWrapper = styled.section`
   width: 100%;
 
   padding: 0 40px;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    gap: 20px;
+  }
 `;

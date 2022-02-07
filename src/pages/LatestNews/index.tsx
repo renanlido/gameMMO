@@ -1,5 +1,5 @@
 import { HStack, Image, Link, Spinner, Text, VStack } from '@chakra-ui/react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, ChangeEvent } from 'react';
 import { Container } from '../../components/Container';
 import { Content } from '../../components/Content';
 import { Header } from '../../components/Header';
@@ -12,7 +12,7 @@ import { Input } from './styles';
 const LatestNews: React.FC = () => {
   const [data, setData] = useState<GetLatestNesProps[]>([]);
   const [searchResults, setSearchResults] = useState<GetLatestNesProps[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = React.useState('');
 
   const fetchData = useCallback(async () => {
@@ -26,12 +26,10 @@ const LatestNews: React.FC = () => {
       setLoading(true);
       const response = await fetchData();
 
-      if (response) {
-        setData(response);
-      }
+      setData(response);
+      setLoading(false);
     };
     getData();
-    setLoading(false);
   }, []);
 
   const handleChange = (props: React.ChangeEvent<HTMLInputElement>) => {

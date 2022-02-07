@@ -6,5 +6,5 @@ export const Container = styled.article`
   flex: 1;
   width: 100%;
   max-width: 1200px;
-  padding: 0 20px;
+  padding: 0 20px 40px;
 `;

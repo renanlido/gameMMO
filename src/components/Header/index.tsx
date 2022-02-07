@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button } from '@chakra-ui/react';
+import { Button, Link } from '@chakra-ui/react';
+import { Link as ReactLink } from 'react-router-dom';
+import { FaHome } from 'react-icons/fa';
 import { Container, Nav, NavWrapper, HeaderContent } from './styles';
 
 import newWorldMMO from '../../assets/images/newWordLogo.png';
@@ -17,9 +19,24 @@ const Header: React.FC<HeaderProps> = ({ banner, bgImage, pageName }) => (
       <NavWrapper>
         <h1>{pageName || 'DEVmmo'}</h1>
 
-        <Button colorScheme="green" height={35}>
-          Sign in / Sign up
-        </Button>
+        <div>
+          <Link
+            as={ReactLink}
+            to="/"
+            display="flex"
+            flexDirection="row"
+            gap="5px"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <FaHome />
+            Go to home
+          </Link>
+
+          <Link as={ReactLink} to="/latest-news">
+            Latest News
+          </Link>
+        </div>
       </NavWrapper>
     </Nav>
     {banner && (
