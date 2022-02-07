@@ -1,0 +1,10 @@
+{
+  "name": "Observatório dos Sistemas Nacionais de Proteção Socioambiental da Região Amazônica",
+  "short_name": "PanAmazônia",
+  "theme_color": "#243842",
+  "background_color": "#fff",
+  "display": "browser",
+  "orientation": "landscape",
+  "scope": "/",
+  "start_url": "/"
+}
