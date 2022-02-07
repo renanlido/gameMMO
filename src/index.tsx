@@ -5,8 +5,6 @@ import { ChakraProvider } from '@chakra-ui/react';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-require('dotenv').config();
-
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>

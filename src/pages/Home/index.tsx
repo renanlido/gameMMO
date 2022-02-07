@@ -1,7 +1,6 @@
 import { Spinner } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Card } from '../../components/Card';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 import {
   InputWrapper,
