@@ -88,6 +88,10 @@ const GameDetails: React.FC = () => {
     }
   }, []);
 
+  // useEffect(() => {
+
+  // },[])
+
   useEffect(() => {
     const getData = async () => {
       const response = await fetchData();
