@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Spinner } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Card } from '../../components/Card';
@@ -52,6 +53,7 @@ const Home: React.FC = () => {
     } catch (error) {
       console.log(`Ta porra! Deu erro: ${error}`);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

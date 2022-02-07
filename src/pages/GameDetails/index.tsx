@@ -104,6 +104,7 @@ const GameDetails: React.FC = () => {
       }
     };
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (data) {

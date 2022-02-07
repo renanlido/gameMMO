@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Link } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import { Container, Nav, NavWrapper, HeaderContent } from './styles';

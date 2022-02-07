@@ -1,5 +1,5 @@
 import { HStack, Image, Link, Spinner, Text, VStack } from '@chakra-ui/react';
-import React, { useCallback, useEffect, useState, ChangeEvent } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Container } from '../../components/Container';
 import { Content } from '../../components/Content';
 import { Header } from '../../components/Header';
@@ -30,6 +30,7 @@ const LatestNews: React.FC = () => {
       setLoading(false);
     };
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (props: React.ChangeEvent<HTMLInputElement>) => {
