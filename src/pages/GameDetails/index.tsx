@@ -88,9 +88,12 @@ const GameDetails: React.FC = () => {
     }
   }, []);
 
-  // useEffect(() => {
+  useEffect(() => {
+    const commentsState = comments;
 
-  // },[])
+    // add storage here
+    console.log(comments);
+  }, [comments]);
 
   useEffect(() => {
     const getData = async () => {
