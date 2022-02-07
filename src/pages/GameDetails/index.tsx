@@ -43,6 +43,7 @@ interface StoragedComments extends SubmitedComment {
 const GameDetails: React.FC = () => {
   const [data, setData] = useState<FindOne>();
   const [comments, setComments] = useState<StoragedComments[]>([]);
+  const [comments2, setComments2] = useState<StoragedComments[]>([]);
   const { register, handleSubmit } = useForm<SubmitedComment>();
 
   const query = useQuery();
@@ -89,7 +90,7 @@ const GameDetails: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const commentsState = comments;
+    setComments2(comments);
 
     // add storage here
     console.log(comments);
@@ -347,7 +348,7 @@ const GameDetails: React.FC = () => {
             </VStack>
           </VStack>
 
-          {comments.map(item => (
+          {comments2.map(item => (
             <VStack
               key={item.id}
               background="whitesmoke"
